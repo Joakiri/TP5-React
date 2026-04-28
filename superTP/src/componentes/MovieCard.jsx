@@ -9,18 +9,17 @@ const TYPE_LABELS = {
 const POSTER_FALLBACK = posterVacio
 
 function MovieCard({ movie, onSelect }) {
-  const { imdbID, Title, Year, Type, Poster } = movie
+  const { omdbID, Title, Year, Type, Poster } = movie
 
   const typeLabel = TYPE_LABELS[Type] ?? Type
   const posterSrc = Poster !== 'N/A' ? Poster : POSTER_FALLBACK
 
   return (
-    <article className="movie-card" onClick={() => onSelect(imdbID)}>
+    <article className="movie-card" onClick={() => onSelect(omdbID)}>
       <img
         className="movie-card__poster"
         src={posterSrc}
         alt={`Póster de ${Title}`}
-        loading="lazy"
       />
       <div className="movie-card__info">
         <span className="movie-card__type">{typeLabel}</span>
