@@ -12,12 +12,10 @@ function MovieList({ movies, onSelect }) {
   return (
     <ul className="movie-list">
       {movies.map((movie) => (
-
-
-        <li key={movie.omdbID}>
+        <li key={movie.imdbID}>
           <MovieCard movie={movie} onSelect={onSelect} />
         </li>
-      ))}
+))}
     </ul>
   )
 }

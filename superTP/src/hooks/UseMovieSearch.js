@@ -1,57 +1,46 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { searchMovies } from '../services/API'
 
-const API_KEY = import.meta.env.VITE_OMDB_API_KEY
-const BASE_URL = 'http://www.omdbapi.com/?apikey=[yourkey]&'
-
-function useMovieDetail(imdbID) {
-  const [movie, setMovie]     = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState(null)
+function useMovieSearch(query) {
+  const [movies, setMovies]             = useState([])
+  const [loading, setLoading]           = useState(false)
+  const [error, setError]               = useState(null)
+  const [totalResults, setTotalResults] = useState(0)
 
   useEffect(() => {
-    if (!imdbID) {
-      setMovie(null)
+    if (!query || query.trim().length < 2) {
+      setMovies([])
       setError(null)
+      setTotalResults(0)
       return
     }
 
-    const controller = new AbortController()
-
-    const fetchDetail = async () => {
+    const fetchMovies = async () => {
       setLoading(true)
       setError(null)
-      setMovie(null)
 
       try {
-        const { data } = await axios.get(BASE_URL, {
-          params: {
-            apikey: API_KEY,
-            i: imdbID,
-            plot: 'full',
-          },
-          signal: controller.signal,
-        })
+        const { data } = await searchMovies(query)
 
         if (data.Response === 'True') {
-          setMovie(data)
+          setMovies(data.Search)
+          setTotalResults(parseInt(data.totalResults))
         } else {
+          setMovies([])
+          setTotalResults(0)
           setError(data.Error)
         }
       } catch (err) {
-        if (axios.isCancel(err)) return
         setError('Error de red. Verificá tu conexión.')
       } finally {
         setLoading(false)
       }
     }
 
-    fetchDetail()
+    fetchMovies()
+  }, [query])
 
-    return () => controller.abort()
-  }, [imdbID])
-
-  return { movie, loading, error }
+  return { movies, loading, error, totalResults }
 }
 
-export default useMovieDetail
+export default useMovieSearch
