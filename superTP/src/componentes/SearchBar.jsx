@@ -12,6 +12,7 @@ function SearchBar({ onSearch }) {
     onSearch(trimmed)
   }
  
+  
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
       <input

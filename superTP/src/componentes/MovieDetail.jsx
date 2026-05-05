@@ -33,9 +33,6 @@ function MovieDetail({ movie, onBack }) {
  
   return (
     <section className="movie-detail">
-      <button className="movie-detail__back" onClick={onBack}>
-         Volver
-      </button>
  
       <div className="movie-detail__header">
         <img className="movie-detail__poster" src={posterSrc} alt={`Póster de ${Title}`}/>

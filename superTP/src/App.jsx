@@ -16,15 +16,12 @@ function App() {
   const handleSearch = (newQuery) => {
     setQuery(newQuery)
   }
-
   const handleSelect = (imdbID) => {
     setSelectedId(imdbID)
   }
-
   const handleClose = () => {
     setSelectedId(null)
   }
-
   return (
     <div className="app">
       <header className="app__header">
