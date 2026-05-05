@@ -394,3 +394,39 @@ body {
   border-color: var(--gold);
   color: var(--gold);
 }
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter-bar__btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.filter-bar__btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.filter-bar__btn--active {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  color: #000000;
+  font-weight: 700;
+}
+
+.filter-bar__btn--active:hover {
+  background-color: var(--gold-dark);
+  border-color: var(--gold-dark);
+  color: #000000;
+}

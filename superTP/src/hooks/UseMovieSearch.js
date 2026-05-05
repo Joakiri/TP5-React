@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { searchMovies } from '../services/API'
 
-function useMovieSearch(query) {
+function useMovieSearch(query, type) {
   const [movies, setMovies]             = useState([])
   const [loading, setLoading]           = useState(false)
   const [error, setError]               = useState(null)
@@ -20,7 +20,7 @@ function useMovieSearch(query) {
       setError(null)
 
       try {
-        const { data } = await searchMovies(query)
+        const { data } = await searchMovies(query, type)
 
         if (data.Response === 'True') {
           setMovies(data.Search)
@@ -38,7 +38,7 @@ function useMovieSearch(query) {
     }
 
     fetchMovies()
-  }, [query])
+  }, [query, type])
 
   return { movies, loading, error, totalResults }
 }
